@@ -1,3 +1,5 @@
+import styles from './stylesFilter.module.css';
+
 const Filter = ({ filter, onChange }) => {
   return (
     <input
