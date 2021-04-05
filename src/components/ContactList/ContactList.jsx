@@ -11,7 +11,7 @@ const ContactList = ({ contacts, onRemove }) => {
   return (
     <ul>
       {contacts.map(contact => (
-        <ContactListItem {...contact} onRemove={onRemove} />
+        <ContactListItem {...contact} onRemove={onRemove} key={contact.id} />
       ))}
     </ul>
   );

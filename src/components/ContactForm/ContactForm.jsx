@@ -23,6 +23,7 @@ class ContactForm extends Component {
     const isValidatedForm = this.validateForm();
     if (!isValidatedForm) return;
     onAdd({ id: uuid(), name, phone });
+    this.resetForm();
   };
 
   validateForm = () => {
