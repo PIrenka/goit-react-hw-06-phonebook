@@ -1,4 +1,5 @@
 import styles from './stylesContactList.module.css';
+import PropTypes from 'prop-types';
 
 const ContactListItem = ({ id, name, phone, onRemove }) => {
   return (
@@ -12,6 +13,8 @@ const ContactListItem = ({ id, name, phone, onRemove }) => {
 };
 
 const ContactList = ({ contacts, onRemove }) => {
+  console.log('{ contacts, onRemove }', { contacts, onRemove });
+
   if (contacts.length === 0) return null;
   return (
     <ul>
@@ -20,6 +23,18 @@ const ContactList = ({ contacts, onRemove }) => {
       ))}
     </ul>
   );
+};
+
+ContactListItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  onRemove: PropTypes.func.isRequired,
+};
+ContactList.propTypes = {
+  // contacts: PropTypes.arrayOf().isRequired,
+  contacts: PropTypes.array.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default ContactList;
