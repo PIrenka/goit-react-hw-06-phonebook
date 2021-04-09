@@ -11,6 +11,7 @@ export default class App extends Component {
     contacts: [],
     filter: '',
   };
+
   handleAddContact = newContact =>
     this.setState(({ contacts }) => ({ contacts: [...contacts, newContact] }));
 
@@ -35,7 +36,25 @@ export default class App extends Component {
       contact.name.toLowerCase().includes(filter.toLowerCase()),
     );
   };
+  //==================Home Work 03==================================
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parcedContacts = JSON.parse(contacts);
 
+    console.log('contacts from localStorage', parcedContacts);
+
+    if (parcedContacts) {
+      this.setState({ contacts: parcedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      console.log('view updated localStorage', this.state.contacts);
+    }
+  }
+  //================================================================
   render() {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();

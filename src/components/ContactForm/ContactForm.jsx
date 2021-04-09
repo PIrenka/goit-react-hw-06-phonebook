@@ -59,7 +59,7 @@ class ContactForm extends Component {
           />
         </Label>
 
-        <Label title="Number">
+        <Label title={'Number'}>
           <input
             type="tel"
             name="phone"

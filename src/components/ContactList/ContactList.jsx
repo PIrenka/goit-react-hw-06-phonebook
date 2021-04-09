@@ -13,8 +13,6 @@ const ContactListItem = ({ id, name, phone, onRemove }) => {
 };
 
 const ContactList = ({ contacts, onRemove }) => {
-  console.log('{ contacts, onRemove }', { contacts, onRemove });
-
   if (contacts.length === 0) return null;
   return (
     <ul>
@@ -32,7 +30,6 @@ ContactListItem.propTypes = {
   onRemove: PropTypes.func.isRequired,
 };
 ContactList.propTypes = {
-  // contacts: PropTypes.arrayOf().isRequired,
   contacts: PropTypes.array.isRequired,
   onRemove: PropTypes.func.isRequired,
 };
