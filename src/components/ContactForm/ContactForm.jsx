@@ -1,17 +1,17 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
+import * as actions from '../../redux/actions';
 import Label from '../Label';
 
 import styles from './stylesContactForm.module.css';
 
-const INITIAL_STATE = {
-  name: '',
-  phone: '',
-};
-
 class ContactForm extends Component {
-  state = INITIAL_STATE;
+  state = {
+    name: '',
+    phone: '',
+  };
 
   handleChangeForm = ({ target }) => {
     const { name, value } = target;
@@ -22,6 +22,7 @@ class ContactForm extends Component {
     e.preventDefault();
 
     const { name, phone } = this.state;
+    // this.props.onSubmit(this.state.name, this.state.phone);
     const { onAdd } = this.props;
 
     const isValidatedForm = this.validateForm();
@@ -40,7 +41,7 @@ class ContactForm extends Component {
     return onCheckUnique(name);
   };
   resetForm = () => {
-    this.setState(INITIAL_STATE);
+    this.setState(this.state);
   };
   render() {
     const { name, phone } = this.state;
@@ -53,8 +54,8 @@ class ContactForm extends Component {
             placeholder="Enter name"
             value={name}
             onChange={this.handleChangeForm}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
           />
         </Label>
@@ -66,8 +67,8 @@ class ContactForm extends Component {
             placeholder="Enter phone number"
             value={phone}
             onChange={this.handleChangeForm}
-            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-            title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
+            // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+            // title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
             required
           />
         </Label>
@@ -79,4 +80,14 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm;
+// const mapStateToProps = dispatch => ({
+//   onSubmit: text => dispatch(actions.addContact(text)),
+//   onChange: () => dispatch(actions.addContact()),
+// });
+
+const mapDispatchToProps = dispatch => ({
+  onSubmit: text => dispatch(actions.addContact(text)),
+  onChange: () => dispatch(actions.addContact()),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);

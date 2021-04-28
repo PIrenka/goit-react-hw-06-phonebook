@@ -7,13 +7,13 @@ import Filter from './Filter';
 import styles from './App.module.css';
 
 export default class App extends Component {
-  state = {
-    contacts: [],
-    filter: '',
-  };
+  // state = {
+  //   contacts: [],
+  //   filter: '',
+  // };
 
-  handleAddContact = newContact =>
-    this.setState(({ contacts }) => ({ contacts: [...contacts, newContact] }));
+  // handleAddContact = newContact =>
+  //   this.setState(({ contacts }) => ({ contacts: [...contacts, newContact] }));
 
   handleCheckUnique = name => {
     const { contacts } = this.state;
@@ -23,12 +23,12 @@ export default class App extends Component {
     return !isExistContact;
   };
 
-  handleRemoveContact = id =>
-    this.setState(({ contacts }) => ({
-      contacts: contacts.filter(contact => contact.id !== id),
-    }));
+  // handleRemoveContact = id =>
+  //   this.setState(({ contacts }) => ({
+  //     contacts: contacts.filter(contact => contact.id !== id),
+  //   }));
 
-  handleFilterChange = filter => this.setState({ filter });
+  // handleFilterChange = filter => this.setState({ filter });
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
@@ -37,23 +37,23 @@ export default class App extends Component {
     );
   };
   //==================Home Work 03==================================
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parcedContacts = JSON.parse(contacts);
+  // componentDidMount() {
+  //   const contacts = localStorage.getItem('contacts');
+  //   const parcedContacts = JSON.parse(contacts);
 
-    console.log('contacts from localStorage', parcedContacts);
+  //   console.log('contacts from localStorage', parcedContacts);
 
-    if (parcedContacts) {
-      this.setState({ contacts: parcedContacts });
-    }
-  }
+  //   if (parcedContacts) {
+  //     this.setState({ contacts: parcedContacts });
+  //   }
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-      console.log('view updated localStorage', this.state.contacts);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.contacts !== prevState.contacts) {
+  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  //     console.log('view updated localStorage', this.state.contacts);
+  //   }
+  // }
   //================================================================
   render() {
     const { filter } = this.state;

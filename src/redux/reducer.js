@@ -1,11 +1,26 @@
-import combineReducers from 'redux';
+import { combineReducers } from 'redux';
+import types from './types';
 
-const items = (state = [], action) => {
-  return state;
+const items = (state = [], { type, payload }) => {
+  switch (type) {
+    case types.ADD_CONTACT:
+      return [...state, payload];
+
+    case types.DELETE_CONTACT:
+      return state.filter(({ id }) => id !== payload);
+
+    default:
+      return state;
+  }
 };
 
-const filter = (state = [], action) => {
-  return state;
-};
+const filter = (state = '', { type, payload }) => {
+  switch (type) {
+    case types.FILTER_CONTACTS:
+      return payload;
 
+    default:
+      return state;
+  }
+};
 export default combineReducers({ items, filter });

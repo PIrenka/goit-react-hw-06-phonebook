@@ -8,11 +8,8 @@ import store from './redux/store';
 import App from './components/App';
 // import App from './components/App_Old';
 
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-
-// Болванка под reducer
-const reducer = (state = {}, action) => state;
+console.log('store.getState(): ', store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
