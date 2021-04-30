@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import types from './types';
+import * as types from './types';
 
-const items = (state = [], { type, payload }) => {
+const itemsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case types.ADD_CONTACT:
       return [...state, payload];
@@ -14,7 +14,7 @@ const items = (state = [], { type, payload }) => {
   }
 };
 
-const filter = (state = '', { type, payload }) => {
+const filterReducer = (state = '', { type, payload }) => {
   switch (type) {
     case types.FILTER_CONTACTS:
       return payload;
@@ -23,4 +23,4 @@ const filter = (state = '', { type, payload }) => {
       return state;
   }
 };
-export default combineReducers({ items, filter });
+export default combineReducers({ items: itemsReducer, filter: filterReducer });
