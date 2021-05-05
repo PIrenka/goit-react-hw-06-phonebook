@@ -1,5 +1,7 @@
 import styles from './stylesFilter.module.css';
-import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions';
 
 const Filter = ({ filter, onChange }) => {
   return (
@@ -7,15 +9,19 @@ const Filter = ({ filter, onChange }) => {
       type="text"
       name="filter"
       value={filter}
-      onChange={({ target }) => onChange(target.value)}
+      // onChange={({ target }) => onChange(target.value)}
+      onChange={onChange}
       placeholder="Enter name for search"
     />
   );
 };
 
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
-export default Filter;
+const mapStateToProps = state => ({
+  filter: state.contacts.filter,
+  // value: state.contacts.filter,
+});
+const mapDispatchToProps = dispatch => ({
+  onChange: e => dispatch(actions.filterContacts(e.currentTarget.value)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+// export default Filter;

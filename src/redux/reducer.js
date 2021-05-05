@@ -1,7 +1,14 @@
 import { combineReducers } from 'redux';
-import * as types from './types';
+import types from './types';
+// import * as types from './types';
 
-const itemsReducer = (state = [], { type, payload }) => {
+// const contactsInitial = {
+//   items: [],
+//   filter: '',
+// };
+
+// const itemsReducer = (state = [], { type, payload }) => {
+const items = (state = [], { type, payload }) => {
   switch (type) {
     case types.ADD_CONTACT:
       return [...state, payload];
@@ -14,7 +21,8 @@ const itemsReducer = (state = [], { type, payload }) => {
   }
 };
 
-const filterReducer = (state = '', { type, payload }) => {
+// const filterReducer = (state = '', { type, payload }) => {
+const filter = (state = '', { type, payload }) => {
   switch (type) {
     case types.FILTER_CONTACTS:
       return payload;
@@ -23,4 +31,15 @@ const filterReducer = (state = '', { type, payload }) => {
       return state;
   }
 };
-export default combineReducers({ items: itemsReducer, filter: filterReducer });
+
+// const reducer = { items: itemsReducer, filter: filterReducer };
+// const reducerCombined = combineReducers(reducer);
+// console.log('reducerObj in reducer: ', reducer);
+// export default reducerCombined;
+
+// export default combineReducers({ items: itemsReducer, filter: filterReducer });
+// export default combineReducers({ items, filter });
+const reducer = combineReducers({ items, filter });
+export default reducer;
+
+// export default reducer;

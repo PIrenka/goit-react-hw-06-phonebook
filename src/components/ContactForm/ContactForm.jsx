@@ -12,39 +12,62 @@ class ContactForm extends Component {
     name: '',
     phone: '',
   };
+  nameId = uuid();
 
-  handleChangeForm = ({ target }) => {
-    const { name, value } = target;
+  handleChangeForm = ev => {
+    const { name, value } = ev.currentTarget;
     this.setState({ [name]: value });
   };
+  // handleChangeForm = ({ target }) => {
+  //   const { name, value } = target;
+  //   this.setState({ [name]: value });
+  // };
 
   handleFormSubmit = e => {
     e.preventDefault();
 
-    const { name, phone } = this.state;
+    // const { name, phone } = this.state;
     // this.props.onSubmit(this.state.name, this.state.phone);
-    const { onAdd } = this.props;
-
-    const isValidatedForm = this.validateForm();
-    if (!isValidatedForm) return;
-    onAdd({ id: uuid(), name, phone });
-    this.resetForm();
-  };
-
-  validateForm = () => {
-    const { name, phone } = this.state;
-    const { onCheckUnique } = this.props;
-    if (!name || !phone) {
-      alert('Some field is empty');
-      return false;
+    const existName = this.props.items.some(
+      item => item.name === this.state.name,
+    );
+    if (existName) {
+      window.alert(
+        `LocalHost:3000 says ${this.state.name} is already in contact`,
+      );
+      this.reset();
+      return;
     }
-    return onCheckUnique(name);
+    this.props.onSubmit(this.state);
+    this.reset();
   };
-  resetForm = () => {
-    this.setState(this.state);
+
+  //   const { onAdd } = this.props;
+
+  //   const isValidatedForm = this.validateForm();
+  //   if (!isValidatedForm) return;
+  //   onAdd({ id: uuid(), name, phone });
+  //   this.resetForm();
+  // };
+
+  // validateForm = () => {
+  //   // const { name, phone } = this.state;
+  //   const { name, phone } = this.props;
+  //   const { onCheckUnique } = this.props;
+  //   if (!name || !phone) {
+  //     alert('Some field is empty');
+  //     return false;
+  //   }
+  //   return onCheckUnique(name);
+  // };
+
+  reset = () => {
+    return this.setState({ name: '', phone: '' });
   };
+
   render() {
-    const { name, phone } = this.state;
+    // const { name, phone } = this.state;
+    // const { name, phone } = this.props;
     return (
       <form onSubmit={this.handleFormSubmit} className={styles.form}>
         <Label title="Name">
@@ -52,10 +75,11 @@ class ContactForm extends Component {
             type="text"
             name="name"
             placeholder="Enter name"
-            value={name}
+            value={this.state.name}
             onChange={this.handleChangeForm}
-            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            id={this.nameId}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
           />
         </Label>
@@ -65,10 +89,10 @@ class ContactForm extends Component {
             type="tel"
             name="phone"
             placeholder="Enter phone number"
-            value={phone}
+            value={this.state.phone}
             onChange={this.handleChangeForm}
-            // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-            // title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
+            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+            title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
             required
           />
         </Label>
@@ -84,10 +108,13 @@ class ContactForm extends Component {
 //   onSubmit: text => dispatch(actions.addContact(text)),
 //   onChange: () => dispatch(actions.addContact()),
 // });
+const mapStateToProps = ({ contacts: { items } }) => {
+  return { items };
+};
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: text => dispatch(actions.addContact(text)),
-  onChange: () => dispatch(actions.addContact()),
+  onSubmit: ({ name, phone }) => dispatch(actions.addContact({ name, phone })),
+  // onChange: () => dispatch(actions.addContact()),
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
