@@ -14,26 +14,23 @@ class ContactForm extends Component {
   };
   nameId = uuid();
 
-  handleChangeForm = ev => {
-    const { name, value } = ev.currentTarget;
+  handleChangeForm = ({ target }) => {
+    const { name, value } = target;
     this.setState({ [name]: value });
   };
-  // handleChangeForm = ({ target }) => {
-  //   const { name, value } = target;
-  //   this.setState({ [name]: value });
-  // };
 
   handleFormSubmit = e => {
     e.preventDefault();
 
-    // const { name, phone } = this.state;
-    // this.props.onSubmit(this.state.name, this.state.phone);
     const existName = this.props.items.some(
       item => item.name === this.state.name,
     );
-    if (existName) {
+    const existPhoneNumber = this.props.items.some(
+      item => item.phone === this.state.phone,
+    );
+    if (existName || existPhoneNumber) {
       window.alert(
-        `LocalHost:3000 says ${this.state.name} is already in contact`,
+        `LocalHost:3000 says contact with such name or phone number is already exists`,
       );
       this.reset();
       return;
@@ -66,8 +63,6 @@ class ContactForm extends Component {
   };
 
   render() {
-    // const { name, phone } = this.state;
-    // const { name, phone } = this.props;
     return (
       <form onSubmit={this.handleFormSubmit} className={styles.form}>
         <Label title="Name">

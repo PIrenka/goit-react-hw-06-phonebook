@@ -32,9 +32,9 @@ const ContactList = ({ contacts, onDeleteContact }) => {
 
 // export default ContactList;
 
-// const getFilter = (allContacts, filter) => {
+// const getFilter = (contacts, filter) => {
 //   const normalizedFilter = filter.toLowerCase();
-//   return allContacts.filter(({ name }) =>
+//   return contacts.filter(({ name }) =>
 //     name.toLowerCase().includes(normalizedFilter),
 //   );
 // };
@@ -42,20 +42,21 @@ const ContactList = ({ contacts, onDeleteContact }) => {
 // const mapStateToProps = ({ items, filter }) => ({
 //   contacts: getFilter(items, filter),
 // });
-// const mapStateToProps = state => {
+
 const mapStateToProps = ({ contacts: { items, filter } }) => {
   const normalizedFilter = filter.toLowerCase();
   const visibleContacts = items.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter),
   );
-
   return {
     contacts: visibleContacts,
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     onDeleteContact: id => dispatch(actions.deleteContact(id)),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
