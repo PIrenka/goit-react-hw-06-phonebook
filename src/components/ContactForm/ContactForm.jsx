@@ -2,7 +2,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
-import * as actions from '../../redux/actions';
+// import * as actions from '../../redux/actions';
+import * as actions from '../../redux/phoneBook/actions';
 import Label from '../Label';
 
 import styles from './stylesContactForm.module.css';

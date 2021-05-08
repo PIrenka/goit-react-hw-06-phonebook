@@ -7,11 +7,6 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(rootReducer, composeWithDevTools());
-// export const store = createStore(
-//   reducer,
-//   window.__REDUX_DEVTOOLS_EXTENSION__ &&
-//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__,
-// );
 
 export default store;
 
@@ -35,7 +30,8 @@ export default store;
 // import contactsReducer from './Phone/phone-reducer';
 
 // const persistConfig = {
-//   key: 'phoneBooks',
+//   key: 'phoneBook',
+//   // key: 'phoneBooks',
 //   storage,
 //   blacklist: ['filter'],
 // };
@@ -59,3 +55,4 @@ export default store;
 // const persistor = persistStore(store);
 
 // export default { store, persistor };
+// // export { store, persistor };

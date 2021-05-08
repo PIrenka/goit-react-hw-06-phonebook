@@ -4,17 +4,16 @@ import ReactDOM from 'react-dom';
 import './styles.css';
 import 'modern-normalize/modern-normalize.css';
 
-// import { store } from './redux/store';
 import store from './redux/store';
+// import { store } from './redux/store';
+// import * as store from './redux/store';
 import App from './components/App';
 
 import { Provider } from 'react-redux';
 
-// console.log('store.getState(): ', store.getState());
-
 ReactDOM.render(
   <React.StrictMode>
-    <Provider Provider store={store}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,
