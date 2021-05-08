@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
-// import * as actions from '../../redux/actions';
+// import * as actions from '../../redux/phoneBookNoToolkits/actions';
 import * as actions from '../../redux/phoneBook/actions';
 import Label from '../Label';
 
@@ -39,25 +39,6 @@ class ContactForm extends Component {
     this.props.onSubmit(this.state);
     this.reset();
   };
-
-  //   const { onAdd } = this.props;
-
-  //   const isValidatedForm = this.validateForm();
-  //   if (!isValidatedForm) return;
-  //   onAdd({ id: uuid(), name, phone });
-  //   this.resetForm();
-  // };
-
-  // validateForm = () => {
-  //   // const { name, phone } = this.state;
-  //   const { name, phone } = this.props;
-  //   const { onCheckUnique } = this.props;
-  //   if (!name || !phone) {
-  //     alert('Some field is empty');
-  //     return false;
-  //   }
-  //   return onCheckUnique(name);
-  // };
 
   reset = () => {
     return this.setState({ name: '', phone: '' });
@@ -100,17 +81,12 @@ class ContactForm extends Component {
   }
 }
 
-// const mapStateToProps = dispatch => ({
-//   onSubmit: text => dispatch(actions.addContact(text)),
-//   onChange: () => dispatch(actions.addContact()),
-// });
 const mapStateToProps = ({ contacts: { items } }) => {
   return { items };
 };
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: ({ name, phone }) => dispatch(actions.addContact({ name, phone })),
-  // onChange: () => dispatch(actions.addContact()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

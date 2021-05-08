@@ -1,6 +1,6 @@
 import styles from './stylesContactList.module.css';
 import { connect } from 'react-redux';
-// import * as actions from '../../redux/actions';
+// import * as actions from '../../redux/phoneBookNoToolkits/actions';
 import * as actions from '../../redux/phoneBook/actions';
 
 const ContactListItem = ({ id, name, phone, onDeleteContact }) => {
@@ -30,19 +30,6 @@ const ContactList = ({ contacts, onDeleteContact }) => {
     </ul>
   );
 };
-
-// export default ContactList;
-
-// const getFilter = (contacts, filter) => {
-//   const normalizedFilter = filter.toLowerCase();
-//   return contacts.filter(({ name }) =>
-//     name.toLowerCase().includes(normalizedFilter),
-//   );
-// };
-
-// const mapStateToProps = ({ items, filter }) => ({
-//   contacts: getFilter(items, filter),
-// });
 
 const mapStateToProps = ({ contacts: { items, filter } }) => {
   const normalizedFilter = filter.toLowerCase();

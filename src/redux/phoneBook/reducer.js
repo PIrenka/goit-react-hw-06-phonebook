@@ -12,5 +12,3 @@ const filter = createReducer('', {
 });
 
 export default combineReducers({ items, filter });
-// const reducer = combineReducers({ items, filter });
-// export default reducer;
